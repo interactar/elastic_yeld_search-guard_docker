@@ -1,0 +1,33 @@
+version: '2'
+services:
+#Maintainer: jailbirt.
+#By default I override your local node_modules directory.
+  
+ #ElasticSearch Official Image
+ elasticsearch:
+    image: elasticsearch
+    #required by elastalert
+    container_name: elasticsearch_host
+    hostname: elasticsearch_host
+    ports:
+       - "9200:9200"
+    #Get config dir from docker outside
+    volumes:
+       - ./data:/usr/share/elasticsearch/data
+ 
+ kibana:
+    image: kibana
+    #required by elastalert
+    container_name: kibana_host
+    hostname: kibana_host
+    ports:
+       - "5601:5601"
+    #Get config dir from docker outside
+    volumes:
+       - ./data:/usr/share/kibana/data
+    environment:
+       - ELASTICSEARCH_URL=http://elasticsearch_host:9200
+
+ #Based on https://github.com/Yelp/elastalert / https://github.com/krizsan/elastalert-docker
+ elastalert:
+    image: ivankrizsan/elastalert
