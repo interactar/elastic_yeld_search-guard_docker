@@ -31,3 +31,6 @@ services:
  #Based on https://github.com/Yelp/elastalert / https://github.com/krizsan/elastalert-docker
  elastalert:
     image: ivankrizsan/elastalert
+    container_name: elastalert_host
+    volumes:
+       - ./elastalert-rules:/opt/rules
