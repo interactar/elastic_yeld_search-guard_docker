@@ -40,3 +40,10 @@ services:
        - ../ealert-api:/src/ealert-api-rulz
        - ./start-elastalert.sh:/tmp/start-elastalert.sh
        - /opt/rules:/opt/rules
+networks:
+   clm:
+      ipam:
+        driver: default
+        config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
