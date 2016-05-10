@@ -33,7 +33,8 @@ services:
  elastalert:
     image: interactar/elk_elastalertwithapi
     container_name: elastalert_host
+    ports:
+            - "3000:3000"
     volumes:
        - ./config.js:/etc/ealertapirc.conf
-    volumes:
        - /opt/rules:/opt/rules
