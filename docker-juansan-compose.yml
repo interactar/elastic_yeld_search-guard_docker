@@ -35,6 +35,8 @@ services:
     container_name: elastalert_host
     ports:
        - "3000:3000"
+    environment:
+       - ELASTICSEARCH_HOST=172.16.238.1
     volumes:
        - ./config.js:/etc/ealertapirc.conf
        - ../ealert-api:/src/ealert-api-rulz
