@@ -38,5 +38,5 @@ services:
     volumes:
        - ./config.js:/etc/ealertapirc.conf
        - ../ealert-api:/src/ealert-api-rulz
-       - ./start-elastalert.sh:/opt/
+       - ./start-elastalert.sh:/opt/start-elastalert.sh
        - /opt/rules:/opt/rules
