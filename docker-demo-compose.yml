@@ -16,32 +16,35 @@ services:
  #    volumes:
  #       - ./data:/usr/share/elasticsearch/data
  
- kibana:
-    image: kibana
-    #required by elastalert
-    container_name: kibana_host
-    hostname: kibana_host
-    ports:
-       - "5601:5601"
-    #Get config dir from docker outside
-    volumes:
-       - ./data:/usr/share/kibana/data
-    environment:
-       - ELASTICSEARCH_URL=http://elasticsearch_host:9200
+ #kibana:
+ #   image: kibana
+ #   #required by elastalert
+ #   container_name: kibana_host
+ #   hostname: kibana_host
+ #   ports:
+ #      - "5601:5601"
+ #   #Get config dir from docker outside
+ #   volumes:
+ #      - ./data:/usr/share/kibana/data
+ #   environment:
+ #      - ELASTICSEARCH_URL=http://elasticsearch_host:9200
 
  #Based on https://github.com/Yelp/elastalert / https://github.com/krizsan/elastalert-docker
  elastalert:
     image: interactar/elk_elastalertwithapi
     container_name: elastalert_host
     ports:
-       - "3000:3000"
+       - "3001:3000"
     environment:
        - ELASTICSEARCH_HOST=172.16.238.1
     volumes:
        - ./config.js:/etc/ealertapirc.conf
        #- ../ealert-api:/src/ealert-api-rulz
-       - ./start-elastalert.sh:/tmp/start-elastalert.sh
+       - ./start-elastalert.sh:/opt/start-elastalert.sh
        - /opt/rules:/opt/rules
+    networks:
+       - clm
+    command : /opt/start-elastalert.sh 
 
 networks:
    clm:

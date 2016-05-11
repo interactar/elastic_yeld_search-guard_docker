@@ -3,7 +3,7 @@
 set -e
 echo "Starting EAAPI..." 
 cd  /src/ealert-api-rulz 
-DEBUG=* ealert-api supervisor index.js &
+DEBUG=* supervisor index.js &
 
 # Set the timezone.
 if [ "$SET_CONTAINER_TIMEZONE" = "true" ]; then
