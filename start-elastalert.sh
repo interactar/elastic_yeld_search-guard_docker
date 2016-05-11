@@ -22,7 +22,7 @@ ntpd -s
 rm -f garbage_file
 while ! wget -O garbage_file ${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT} 2>/dev/null
 do
-	echo "Waiting for Elasticsearch..."
+	echo "Waiting for Elasticsearch on ${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT} ..."
 	rm -f garbage_file
 	sleep 1
 done

@@ -5,17 +5,18 @@ services:
   
  #ElasticSearch with search-guard and elastalert plugins installed by default.
  #
-#  elasticsearch:
-#     image: elasticsearch
-#     #required by elastalert
-#     container_name: elasticsearch_host
-#     hostname: elasticsearch_host
-#     ports:
-#        - "9200:9200"
-#     #Get config dir from docker outside
-#     volumes:
-#     - /var/lib/elasticsearch:/var/lib/elasticsearch
-#        - ./data:/usr/share/elasticsearch/data
+ elasticsearch:
+    image: elasticsearch
+    #required by elastalert
+    container_name: elasticsearch_host
+    hostname: elasticsearch_host
+    ports:
+       - "9200:9200"
+    #Get config dir from docker outside
+    volumes:
+#       - /var/lib/elasticsearch:/var/lib/elasticsearch
+        - /var/lib/elasticsearch:/usr/share/elasticsearch/data
+#       - ./data:/usr/share/elasticsearch/data
  
  #kibana:
  #   image: kibana
@@ -37,20 +38,11 @@ services:
     ports:
        - "3001:3000"
     environment:
-       - ELASTICSEARCH_HOST=172.16.238.1
+       - ELASTICSEARCH_HOST=elasticsearch_host
     volumes:
        - ./config.js:/etc/ealertapirc.conf
        #- ../ealert-api:/src/ealert-api-rulz
        - ./start-elastalert.sh:/opt/start-elastalert.sh
        - /opt/rules:/opt/rules
-    networks:
-       - clm
     command : /opt/start-elastalert.sh 
 
-networks:
-   clm:
-      ipam:
-        driver: default
-        config:
-        - subnet: 172.16.238.0/24
-          gateway: 172.16.238.1
