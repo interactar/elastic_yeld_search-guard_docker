@@ -15,7 +15,10 @@ services:
     #Get config dir from docker outside
     volumes:
 #       - /var/lib/elasticsearch:/var/lib/elasticsearch
+        - ./elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+        - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
         - /var/lib/elasticsearch:/usr/share/elasticsearch/data
+        - /mnt/backups/elasticsearch:/mnt/backups/elasticsearch
 #       - ./data:/usr/share/elasticsearch/data
  
  #kibana:

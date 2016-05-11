@@ -32,8 +32,8 @@ sleep 5
 # Check if the Elastalert index exists in Elasticsearch and create it if it does not.
 if ! wget -O garbage_file ${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/elastalert_status 2>/dev/null
 then
-	echo "Creating Elastalert index in Elasticsearch..."
-    elastalert-create-index --index elastalert_status --old-index ""
+	echo "Creating Elastalert index in Elasticsearch... run inside docker the following command:"
+  echo  elastalert-create-index --index elastalert_status --old-index \"\"
 else
     echo "Elastalert index already exists in Elasticsearch."
 fi
