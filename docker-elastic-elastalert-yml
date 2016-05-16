@@ -45,6 +45,8 @@ services:
        - "3001:3000"
     environment:
        - ELASTICSEARCH_HOST=elasticsearch_host
+    links:
+        - smtp
     volumes:
        - ./config.js:/etc/ealertapirc.conf
        #- ../ealert-api:/src/ealert-api-rulz
@@ -52,3 +54,9 @@ services:
        - /opt/rules:/opt/rules
     command : /opt/start-elastalert.sh 
 
+#Email Relay
+smtp:
+  image: mwader/postfix-relay
+    restart: always
+      environment:
+          - POSTFIX_myhostname=bi.canopus.com.ar
