@@ -6,13 +6,16 @@ services:
  #ElasticSearch with search-guard and elastalert plugins installed by default.
  #
  elasticsearch:
-    image: elasticsearch
+    #default image: elasticsearch
+    image: interactar/elk_headplugin
     #required by elastalert
     container_name: elasticsearch_host
     hostname: elasticsearch_host
     ports:
        - "9200:9200"
     #Get config dir from docker outside
+    environment:
+       - ES_HEAP_SIZE=2G
     volumes:
 #       - /var/lib/elasticsearch:/var/lib/elasticsearch
         - ./elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
